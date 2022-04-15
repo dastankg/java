@@ -17,6 +17,7 @@ public class Menu {
         System.out.println("2 - Купить валюту");
         System.out.println("3 - Продать валюту");
         System.out.println("4 - Оформить микро взайм");
+        System.out.println("5 - Вход");
         System.out.println("0 - Завершить программу");
         System.out.println();
         int first = sc.nextInt();
@@ -24,9 +25,11 @@ public class Menu {
             System.out.println();
             CSVLibrary.main();
             menu();
-        }
-        else if (first == 2){
+        } else if (first == 2) {
             System.out.println(Buy.main());
+            menu();
+        } else if (first == 3) {
+            System.out.println(Sell.main());
             menu();
         }
 
