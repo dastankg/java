@@ -31,9 +31,37 @@ public class Menu {
         } else if (first == 3) {
             System.out.println(Sell.main());
             menu();
+        } else if (first == 5){
+            Auth.main();
+            menu();
         }
 
     }
+
+    public static void main_admin(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println();
+        System.out.println("Что вы хотите сделать");
+        System.out.println();
+        System.out.println("1 - посмотреть счет Банка");
+        System.out.println("2 - попольнить счет Банка");
+        System.out.println("3 - взять деньги");
+        System.out.println("4 - посмотреть историю продажи валют");
+        System.out.println("5 - посмотреть историю покупки валют");
+        System.out.println("6 - выдача кредита");
+        System.out.println("7 - просмотр клментов");
+        System.out.println("9 - просмотр плохих клиентов");
+        System.out.println("10 - просмотр хороших клиентов");
+        int n = sc.nextInt();
+        if (n == 1){
+            Admin.show_currency();
+        } else if (n == 2){
+            Admin.add_currency();
+        }
+
+    }
+
+
 
 
     public static void menu() {
