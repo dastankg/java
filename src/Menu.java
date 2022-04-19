@@ -31,14 +31,18 @@ public class Menu {
         } else if (first == 3) {
             System.out.println(Sell.main());
             menu();
-        } else if (first == 5){
+        } else if(first == 4){
+            Credit.main();
+            menu();
+        }
+        else if (first == 5) {
             Auth.main();
             menu();
         }
 
     }
 
-    public static void main_admin(){
+    public static void main_admin() {
         Scanner sc = new Scanner(System.in);
         System.out.println();
         System.out.println("Что вы хотите сделать");
@@ -53,16 +57,43 @@ public class Menu {
         System.out.println("9 - просмотр плохих клиентов");
         System.out.println("10 - просмотр хороших клиентов");
         int n = sc.nextInt();
-        if (n == 1){
+        if (n == 1) {
             Admin.show_currency();
-        } else if (n == 2){
+            menu_admin();
+        } else if (n == 2) {
             Admin.add_currency();
+            menu_admin();
+        } else if (n == 3) {
+            Admin.get_currency();
+            menu_admin();
+        } else if (n == 4){
+            Admin.sell_history();
+            menu_admin();
+        } else if (n == 5) {
+            Admin.buy_history();
+            menu_admin();
+        } else if (n == 6) {
+            Admin.credit();
+            menu_admin();
         }
 
     }
 
 
+    public static void menu_admin() {
 
+        Scanner sc = new Scanner(System.in);
+        System.out.println();
+        System.out.println("1 - EXIT");
+        System.out.println("2 - Menu");
+        System.out.println("3 - Main_Menu");
+        int n = sc.nextInt();
+        if (n == 3) {
+            Menu.main();
+        } else if (n == 2) {
+            main_admin();
+        }
+    }
 
     public static void menu() {
 
