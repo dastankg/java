@@ -17,7 +17,8 @@ public class Menu {
         System.out.println("2 - Купить валюту");
         System.out.println("3 - Продать валюту");
         System.out.println("4 - Оформить микро взайм");
-        System.out.println("5 - Вход");
+        System.out.println("5 - Оплатить микро взайм");
+        System.out.println("6 - Вход");
         System.out.println("0 - Завершить программу");
         System.out.println();
         int first = sc.nextInt();
@@ -34,8 +35,10 @@ public class Menu {
         } else if(first == 4){
             Credit.main();
             menu();
+        } else if (first == 5){
+            Pay.pay();
         }
-        else if (first == 5) {
+        else if (first == 6) {
             Auth.main();
             menu();
         }

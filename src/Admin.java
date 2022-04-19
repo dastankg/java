@@ -47,16 +47,17 @@ public class Admin {
                 java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
 
                 Connection connection5 = DB.main();
-                String sql5 = "INSERT INTO client_status (sum_credit, sum_pay_credit, date_start, date_end, percent, " +
-                        "status_credit) VALUE (?, ?, ?, ?, ?, ?) ";
+                String sql5 = "INSERT INTO client_status (sum_credit, sum_pay, sum_pay_credit, date_start, date_end, percent, " +
+                        "status_credit) VALUE (?, ?, ?, ?, ?, ?, ?) ";
                 assert connection5 != null;
                 PreparedStatement preparedStatement5 = connection5.prepareStatement(sql5);
                 preparedStatement5.setDouble(1, Double.parseDouble(s[2]));
-                preparedStatement5.setDouble(2, Double.parseDouble(s[4]));
-                preparedStatement5.setDate(3, startDate);
-                preparedStatement5.setDate(4, Date.valueOf(Time.date(Integer.parseInt(s[1]))));
-                preparedStatement5.setDouble(5, Double.parseDouble(s[3]));
-                preparedStatement5.setBoolean(6, false);
+                preparedStatement5.setDouble(2, 0.0);
+                preparedStatement5.setDouble(3, Double.parseDouble(s[4]));
+                preparedStatement5.setDate(4, startDate);
+                preparedStatement5.setDate(5, Date.valueOf(Time.date(Integer.parseInt(s[1]))));
+                preparedStatement5.setDouble(6, Double.parseDouble(s[3]));
+                preparedStatement5.setBoolean(7, false);
                 preparedStatement5.executeUpdate();
                 preparedStatement5.close();
 
