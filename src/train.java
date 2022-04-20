@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class train {
     public static void main(String[] args) {
-        String path = "demo.csv";
+        String path = "test.csv";
         try {
             CSVReader reader = new CSVReader(new FileReader(path));
             ArrayList<String> arr= new ArrayList<>();

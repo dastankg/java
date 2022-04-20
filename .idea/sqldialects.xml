@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/src/DB.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/Pay.java" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/Sell.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/Update.java" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/train.java" dialect="GenericSQL" />
   </component>
 </project>
