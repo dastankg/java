@@ -32,13 +32,12 @@ public class Menu {
         } else if (first == 3) {
             System.out.println(Sell.main());
             menu();
-        } else if(first == 4){
+        } else if (first == 4) {
             Credit.main();
             menu();
-        } else if (first == 5){
+        } else if (first == 5) {
             Pay.pay();
-        }
-        else if (first == 6) {
+        } else if (first == 6) {
             Auth.main();
             menu();
         }
@@ -57,8 +56,8 @@ public class Menu {
         System.out.println("5 - посмотреть историю покупки валют");
         System.out.println("6 - выдача кредита");
         System.out.println("7 - просмотр клментов");
-        System.out.println("9 - просмотр плохих клиентов");
-        System.out.println("10 - просмотр хороших клиентов");
+        System.out.println("8 - просмотр плохих клиентов");
+        System.out.println("9 - просмотр хороших клиентов");
         int n = sc.nextInt();
         if (n == 1) {
             Admin.show_currency();
@@ -69,7 +68,7 @@ public class Menu {
         } else if (n == 3) {
             Admin.get_currency();
             menu_admin();
-        } else if (n == 4){
+        } else if (n == 4) {
             Admin.sell_history();
             menu_admin();
         } else if (n == 5) {
@@ -77,6 +76,15 @@ public class Menu {
             menu_admin();
         } else if (n == 6) {
             Admin.credit();
+            menu_admin();
+        } else if (n == 7) {
+            Admin.client();
+            menu_admin();
+        } else if (n == 8) {
+            Admin.show_bad_client();
+            menu_admin();
+        } else if (n == 9) {
+            Admin.show_good_client();
             menu_admin();
         }
 

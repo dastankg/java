@@ -1,8 +1,89 @@
 import java.sql.*;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Calendar;
 
 public class Admin {
+    public static void show_bad_client() {
+        try {
+            Connection connection = DB.main();
+            String sql = "SELECT good_client, name_bad_client, personal_number FROM bad_client";
+            assert connection != null;
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                String[] s = new String[3];
+                s[0] = rs.getString(1);
+                s[1] = rs.getString(2);
+                s[2] = rs.getString(3);
+                System.out.println(s[0] + " " + s[1] + " " + s[2]);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void show_good_client() {
+        try {
+            Connection connection = DB.main();
+            String sql = "SELECT good_client, name_good_client, personal_number FROM good_client";
+            assert connection != null;
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                String[] s = new String[3];
+                s[0] = rs.getString(1);
+                s[1] = rs.getString(2);
+                s[2] = rs.getString(3);
+                System.out.println(s[0] + " " + s[1] + " " + s[2]);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void client() {
+        Scanner sc = new Scanner(System.in);
+        try {
+            Connection connection = DB.main();
+            String sql = "SELECT client_id, name_client FROM client";
+            assert connection != null;
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                String[] s = new String[2];
+                s[0] = rs.getString(1);
+                s[1] = rs.getString(2);
+                System.out.println(s[0] + " " + s[1]);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        System.out.println("Хотите увидить подробную инфу | yes > 0");
+        int n = sc.nextInt();
+        if (n > 0) {
+            try {
+                Connection connection = DB.main();
+                String sql = "SELECT client_id, age, phone_number, personal_number, city, job, salary_client " +
+                        "FROM client_status INNER JOIN client_data USING (client_id)";
+                assert connection != null;
+                Statement statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(sql);
+                while (rs.next()) {
+                    String one = rs.getString(1);
+                    String two = rs.getString(2);
+                    String three = rs.getString(3);
+                    String four = rs.getString(4);
+                    String five = rs.getString(5);
+                    String six = rs.getString(6);
+                    String seven = rs.getString(7);
+                    System.out.println(one + " " + two + " " + three + " " + four + " " + five + " " + six + " " + seven);
+                }
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+    }
 
     public static void credit_4(int n) {
         Scanner sc = new Scanner(System.in);
@@ -26,7 +107,7 @@ public class Admin {
                 preparedStatement2.executeUpdate();
                 preparedStatement2.close();
 
-                ;
+
                 Connection connection4 = DB.main();
                 String sql4 = "SELECT * FROM new_client_data_credit WHERE new_client_id = " + n;
                 assert connection4 != null;

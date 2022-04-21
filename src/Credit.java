@@ -25,10 +25,12 @@ public class Credit {
         System.out.println((d * (l[n - 1] / 100)) + d);
         System.out.println("Cогласны");
         String s = sc.next();
+        StringBuilder sb = new StringBuilder();
         if (s.equals("Yes")) {
-            System.out.println("FIO");
-            sc.next();
-            String name = sc.nextLine();
+            System.out.println("Name");
+            sb.append(sc.next()).append(" ");
+            System.out.println("Last");
+            sb.append(sc.next());
             System.out.println("Сколько вам лет");
             int age = sc.nextInt();
             System.out.println("Phone");
@@ -52,7 +54,7 @@ public class Credit {
                     System.out.println("У вас хорошая кредитная история вы можете забрать деньги сразу");
                 } else {
                     System.out.println("Ваша заявка принята и в скором времени мы дадим ответ");
-                    write_date(name, age, number, city, p_num, job, salary, n, d);
+                    write_date(sb.toString(), age, number, city, p_num, job, salary, n, d);
 
                 }
             }
