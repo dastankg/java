@@ -27,6 +27,7 @@ public class Credit {
         String s = sc.next();
         if (s.equals("Yes")) {
             System.out.println("FIO");
+            sc.next();
             String name = sc.nextLine();
             System.out.println("Сколько вам лет");
             int age = sc.nextInt();

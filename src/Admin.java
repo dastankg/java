@@ -55,7 +55,7 @@ public class Admin {
                 preparedStatement5.setDouble(2, 0.0);
                 preparedStatement5.setDouble(3, Double.parseDouble(s[4]));
                 preparedStatement5.setDate(4, startDate);
-                preparedStatement5.setDate(5, Date.valueOf(Time.date(Integer.parseInt(s[1]))));
+                preparedStatement5.setDate(5, Date.valueOf(Time1.date(Integer.parseInt(s[1]))));
                 preparedStatement5.setDouble(6, Double.parseDouble(s[3]));
                 preparedStatement5.setBoolean(7, false);
                 preparedStatement5.executeUpdate();

@@ -1,10 +1,35 @@
-
 import java.sql.*;
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public class Update {
     public static void main(String[] args) {
-        black_list();
+
+    }
+
+    public static void delete(int n) {
+        try {
+            Connection connection = DB.main();
+            String sql = "DELETE FROM client_status WHERE client_id = " + n;
+            String sql1 = "DELETE FROM client_data WHERE client_id = " + n;
+            String sql2 = "DELETE FROM client WHERE client_id = " + n;
+            assert connection != null;
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            PreparedStatement preparedStatement1 = connection.prepareStatement(sql1);
+            preparedStatement1.executeUpdate();
+            preparedStatement1.close();
+
+            PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
+            preparedStatement2.executeUpdate();
+            preparedStatement.close();
+
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     public static void add_good(int n) {
@@ -37,6 +62,8 @@ public class Update {
         } catch (SQLException e) {
             System.out.println(e);
         }
+
+
     }
 
     public static void black_list() {
@@ -49,18 +76,21 @@ public class Update {
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 String s = rs.getString(6);
-                Date date1 = new Date(Integer.parseInt(s.split("-")[0]), Integer.parseInt(s.split("-")[1]),
-                        Integer.parseInt(s.split("-")[2]));
-                Date date2 = new Date(Integer.parseInt(Time.date_now().split("-")[0]),
-                        Integer.parseInt(Time.date_now().split("-")[1]), Integer.parseInt(Time.date_now().split("-")[2]));
-                if (date1.compareTo(date2) < 0) {
+                LocalDate date = LocalDate.parse(s);
+                String c = Time1.date_now();
+                LocalDate date1 = LocalDate.parse(c);
+
+
+                if (date.compareTo(date1) < 0) {
                     double d = rs.getDouble(3);
                     double b = rs.getDouble(4);
                     int n = rs.getInt(1);
                     if (d < b) {
                         add_black(n);
+                        delete(n);
                     } else {
                         add_good(n);
+                        delete(n);
                     }
                 }
 
