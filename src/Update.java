@@ -14,6 +14,7 @@ public class Update {
             String sql1 = "DELETE FROM client_data WHERE client_id = " + n;
             String sql2 = "DELETE FROM client WHERE client_id = " + n;
             assert connection != null;
+
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -24,7 +25,7 @@ public class Update {
 
             PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
             preparedStatement2.executeUpdate();
-            preparedStatement.close();
+            preparedStatement2.close();
 
 
         } catch (SQLException e) {

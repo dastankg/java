@@ -21,8 +21,6 @@ public class Pars {
                 yc.getInputStream()));
         String inputLine;
         ArrayList<Double> arr = new ArrayList<>();
-
-        ;
         while ((inputLine = in.readLine()) != null) {
             if (inputLine.contains("<Value>")) {
                 int index = inputLine.indexOf("</Value>");
@@ -47,7 +45,7 @@ public class Pars {
 
     public static class TestCSV {
         static void main(ArrayList<Double> d) {
-            try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
+            try (PrintWriter writer = new PrintWriter("test.csv")) {
 
                 StringBuilder sb = new StringBuilder();
                 sb.append("id");
@@ -73,7 +71,6 @@ public class Pars {
                 }
 
                 writer.write(sb.toString());
-                writer.close();
 
             } catch (FileNotFoundException e) {
                 System.out.println(e.getMessage());

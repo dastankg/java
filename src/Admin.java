@@ -128,8 +128,7 @@ public class Admin {
                 java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
 
                 Connection connection5 = DB.main();
-                String sql5 = "INSERT INTO client_status (sum_credit, sum_pay, sum_pay_credit, date_start, date_end, percent, " +
-                        "status_credit) VALUE (?, ?, ?, ?, ?, ?, ?) ";
+                String sql5 = "INSERT INTO client_status (sum_credit, sum_pay, sum_pay_credit, date_start, date_end, percent) VALUE (?, ?, ?, ?, ?, ?) ";
                 assert connection5 != null;
                 PreparedStatement preparedStatement5 = connection5.prepareStatement(sql5);
                 preparedStatement5.setDouble(1, Double.parseDouble(s[2]));
@@ -138,7 +137,6 @@ public class Admin {
                 preparedStatement5.setDate(4, startDate);
                 preparedStatement5.setDate(5, Date.valueOf(Time1.date(Integer.parseInt(s[1]))));
                 preparedStatement5.setDouble(6, Double.parseDouble(s[3]));
-                preparedStatement5.setBoolean(7, false);
                 preparedStatement5.executeUpdate();
                 preparedStatement5.close();
 
@@ -167,6 +165,38 @@ public class Admin {
                 preparedStatement1.close();
 
                 System.out.println("Done");
+
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        } else {
+            try {
+                Connection connection6 = DB.main();
+                String sql6 = "DELETE FROM new_client_data_credit WHERE new_client_id = " + n;
+                assert connection6 != null;
+                PreparedStatement preparedStatement6 = connection6.prepareStatement(sql6);
+                preparedStatement6.executeUpdate();
+                preparedStatement6.close();
+
+
+                Connection connection3 = DB.main();
+                String sql3 = "DELETE FROM new_client_data WHERE new_client_id = " + n;
+                assert connection3 != null;
+                PreparedStatement preparedStatement3 = connection3.prepareStatement(sql3);
+                preparedStatement3.executeUpdate();
+                preparedStatement3.close();
+
+
+                Connection connection1 = DB.main();
+                String sql1 = "DELETE FROM new_client WHERE new_client_id = " + n;
+                assert connection1 != null;
+                PreparedStatement preparedStatement1 = connection1.prepareStatement(sql1);
+                preparedStatement1.executeUpdate();
+                preparedStatement1.close();
+
+                System.out.println("Done");
+
+
 
             } catch (SQLException e) {
                 System.out.println(e);
