@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.Calendar;
 
@@ -77,7 +78,13 @@ public class Admin {
                     String five = rs.getString(5);
                     String six = rs.getString(6);
                     String seven = rs.getString(7);
-                    System.out.println(one + " " + two + " " + three + " " + four + " " + five + " " + six + " " + seven);
+                    System.out.println("ID = " + one);
+                    System.out.println("Age = " + two);
+                    System.out.println("Phone number = " + three);
+                    System.out.println("Personal number = " + four);
+                    System.out.println("City = " + five);
+                    System.out.println("Job = " + six);
+                    System.out.println("Salary client = " + seven);
                 }
             } catch (SQLException e) {
                 System.out.println(e);
@@ -87,9 +94,9 @@ public class Admin {
 
     public static void credit_4(int n) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Что было дальше");
-        String decide = sc.next();
-        if (decide.equals("Yes")) {
+        System.out.println("Даем кредит?\nYes | No");
+        String decide = sc.next().toLowerCase(Locale.ROOT);
+        if (decide.equals("yes")) {
             try {
                 Connection connection = DB.main();
                 String sql = "INSERT INTO client (name_client) SELECT name_new_client FROM new_client WHERE new_client_id =" + n;
@@ -197,7 +204,6 @@ public class Admin {
                 System.out.println("Done");
 
 
-
             } catch (SQLException e) {
                 System.out.println(e);
             }
@@ -217,7 +223,7 @@ public class Admin {
             while (rs.next()) {
                 String id = rs.getString(1);
                 String name = rs.getString(2);
-                System.out.println(id + "   " + name);
+                System.out.println(id + "    " + name);
             }
             credit_1();
         } catch (SQLException e) {
@@ -240,7 +246,12 @@ public class Admin {
                 String sum_credit = rs.getString(3);
                 String percent = rs.getString(4);
                 String sum_after_percent = rs.getString(5);
-                System.out.println(id + "   " + month + "   " + sum_credit + "  " + percent + "  " + sum_after_percent);
+                System.out.println("ID = " + id);
+                System.out.println("Month = " + month);
+                System.out.println("Sum credit = " + sum_credit);
+                System.out.println("Percent = " + percent);
+                System.out.println("Sum_after_percent = " + sum_after_percent);
+
             }
             credit_4(n);
 
@@ -260,7 +271,6 @@ public class Admin {
             assert connection != null;
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql1);
-            System.out.println("id   " + "name   " + "   age     " + "number   " + "    city   " + "INN   " + "     job   " + "salary");
             while (rs.next()) {
                 String id = rs.getString(1);
                 String name = rs.getString(2);
@@ -270,7 +280,14 @@ public class Admin {
                 String INN = rs.getString(6);
                 String job = rs.getString(7);
                 String salary = rs.getString(8);
-                System.out.println(id + "   " + name + "   " + "   " + age + "      " + phone_number + "   " + city + "    " + INN + "  " + job + "     " + salary);
+                System.out.println("ID  = " + id);
+                System.out.println("Name = " + name);
+                System.out.println("Age = " + age);
+                System.out.println("Phone_number = " + phone_number);
+                System.out.println("City = " + city);
+                System.out.println("INN = " + INN);
+                System.out.println("Job = " + job);
+                System.out.println("Salary = " + salary);
                 credit_2(n);
             }
 

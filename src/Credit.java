@@ -1,11 +1,13 @@
 import java.sql.*;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Credit {
     public static void main() {
         menu();
     }
-    public static void menu(){
+
+    public static void menu() {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Добро пожаловать");
@@ -23,45 +25,75 @@ public class Credit {
         double[] l = {5, 7.5, 10, 12.5, 15, 17.5};
         System.out.println("Вам придется вернуть");
         System.out.println((d * (l[n - 1] / 100)) + d);
-        System.out.println("Cогласны");
+        System.out.println("Хотите продолжить?");
+        System.out.println("Yes | No");
         String s = sc.next();
         StringBuilder sb = new StringBuilder();
-        if (s.equals("Yes")) {
+        String[] time_data = new String[2];
+        if (s.toLowerCase(Locale.ROOT).equals("yes")) {
             System.out.println("Name");
             sb.append(sc.next()).append(" ");
             System.out.println("Last");
             sb.append(sc.next());
             System.out.println("Сколько вам лет");
             int age = sc.nextInt();
-            System.out.println("Phone");
-            String number = sc.next();
-            System.out.println("City");
-            String city = sc.next();
-            System.out.println("INN");
-            String p_num = sc.next();
-            System.out.println("Job");
-            String j = sc.next();
-            boolean job = true;
-            if (j.equals("Yes")) {
-                job = true;
+            if (age < 18) {
+                System.out.println("Извините но еще нет 18!");
             } else {
-                job = false;
-            }
-            System.out.println("Salary");
-            double salary = sc.nextDouble();
-            if (check(p_num)) {
-                if (check_good(p_num)) {
-                    System.out.println("У вас хорошая кредитная история вы можете забрать деньги сразу");
-                } else {
+                while (true) {
+                    System.out.println("Phone");
+                    String number = sc.next();
+                    if (number.length() != 9) {
+                        System.out.println("Не верный формат напишите еще раз");
+                    } else {
+                        time_data[0] = number;
+                        break;
+                    }
+                }
+
+                System.out.println("City");
+                String city = sc.next();
+                boolean flag = true;
+                while (true) {
+                    System.out.println("INN");
+                    String p_num = sc.next();
+                    if (p_num.length() != 14) {
+                        System.out.println("Не верный формат напишите еще раз");
+                    } else {
+                        if (check(p_num)) {
+                            if (check_good(p_num)) {
+                                System.out.println("У вас хорошая кредитная история вы можете забрать деньги сразу");
+                                break;
+                            } else {
+                                time_data[1] = p_num;
+                                break;
+                            }
+                        } else {
+                            System.out.println("У вас плохая кредитная история вы не можете получить взайм!");
+                            flag = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (flag) {
+                    System.out.println("Job \n Yes | No");
+                    String j = sc.next();
+                    boolean job = j.toLowerCase(Locale.ROOT).equals("yes");
+
+                    System.out.println("Salary");
+                    double salary = sc.nextDouble();
                     System.out.println("Ваша заявка принята и в скором времени мы дадим ответ");
-                    write_date(sb.toString(), age, number, city, p_num, job, salary, n, d);
+                    write_date(sb.toString(), age, time_data[0], city, time_data[1], job, salary, n, d);
+
 
                 }
+                Menu.main();
             }
-            Menu.main();
         }
-
     }
+
+
 
     public static void write_date(String name, int age, String n, String c, String p_n, boolean job, double salary, int m, double s) {
         try {
@@ -166,7 +198,6 @@ public class Credit {
         }
         return false;
     }
-
 
 
 }

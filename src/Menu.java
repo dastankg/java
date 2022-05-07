@@ -9,39 +9,46 @@ public class Menu {
 
     public static void main() {
         Scanner sc = new Scanner(System.in);
-        System.out.println();
-        System.out.println("Welcome to my program");
-        System.out.println();
-        System.out.println("Что вы хотите сделать");
-        System.out.println("1 - Увидеть курс валют");
-        System.out.println("2 - Купить валюту");
-        System.out.println("3 - Продать валюту");
-        System.out.println("4 - Оформить микро взайм");
-        System.out.println("5 - Оплатить микро взайм");
-        System.out.println("6 - Вход");
-        System.out.println("0 - Завершить программу");
-        System.out.println();
-        int first = sc.nextInt();
-        if (first == 1) {
+        while (true) {
             System.out.println();
-            CSVLibrary.main();
-            menu();
-        } else if (first == 2) {
-            System.out.println(Buy.main());
-            menu();
-        } else if (first == 3) {
-            System.out.println(Sell.main());
-            menu();
-        } else if (first == 4) {
-            Credit.main();
-            menu();
-        } else if (first == 5) {
-            Pay.pay();
-        } else if (first == 6) {
-            Auth.main();
-            menu();
-        }
+            System.out.println("Welcome to my program");
+            System.out.println();
+            System.out.println("Что вы хотите сделать");
+            System.out.println("1 - Увидеть курс валют");
+            System.out.println("2 - Купить валюту");
+            System.out.println("3 - Продать валюту");
+            System.out.println("4 - Оформить микро взайм");
+            System.out.println("5 - Оплатить микро взайм");
+            System.out.println("6 - Вход");
+            System.out.println("0 - Завершить программу");
+            System.out.println();
+            int first = sc.nextInt();
+            if (first == 1) {
+                System.out.println();
+                CSVLibrary.main();
+                menu();
+            } else if (first == 2) {
+                System.out.println(Buy.main());
+                menu();
+            } else if (first == 3) {
+                System.out.println(Sell.main());
+                menu();
+            } else if (first == 4) {
+                Credit.main();
+                menu();
+            } else if (first == 5) {
+                Pay.pay();
+            } else if (first == 6) {
+                Auth.main();
+                menu();
+            } else if (first == 0) {
+                System.out.println("До свидания!");
+                break;
+            } else {
+                System.out.println("Не верные данные");
+            }
 
+        }
     }
 
     public static void main_admin() {

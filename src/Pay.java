@@ -10,27 +10,34 @@ public class Pay {
 
     public static void pay() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Напишите ваш INN");
-        String inn = sc.next();
-        System.out.println("Напишите сумму");
-        double d = sc.nextDouble();
-        int n = 1;
-        try {
-            Connection connection = DB.main();
-            String sql = "SELECT client_id,  personal_number FROM client_data WHERE personal_number = "+inn;
-            assert connection != null;
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
-            while (rs.next()) {
-              n = rs.getInt(1);
+        while (true) {
+            System.out.println("Напишите ваш INN");
+            String inn = sc.next();
+            System.out.println("Напишите сумму");
+            if (check_inn(inn)) {
+                double d = sc.nextDouble();
+                int n = 1;
+                try {
+                    Connection connection = DB.main();
+                    String sql = "SELECT client_id,  personal_number FROM client_data WHERE personal_number = " + inn;
+                    assert connection != null;
+                    Statement statement = connection.createStatement();
+                    ResultSet rs = statement.executeQuery(sql);
+                    while (rs.next()) {
+                        n = rs.getInt(1);
+                    }
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+                new_data(d, inn);
+                history_pay(n, d);
+                break;
+            } else {
+                System.out.println("Не верные данные повторите еще раз");
             }
-        } catch (SQLException e) {
-            System.out.println(e);
+
+
         }
-        new_data(d, inn);
-        history_pay(n, d);
-
-
     }
 
     public static void new_data(double n, String inn) {
@@ -48,9 +55,9 @@ public class Pay {
         }
 
 
-
     }
-    public static void history_pay(int n, double d){
+
+    public static void history_pay(int n, double d) {
         try {
             Connection connection = DB.main();
             assert connection != null;
@@ -69,4 +76,24 @@ public class Pay {
             System.out.println(e);
         }
     }
+
+    public static boolean check_inn(String s) {
+        try {
+            Connection connection = DB.main();
+            assert connection != null;
+            String sql = "SELECT personal_number FROM client_data";
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                if (s.equals(rs.getString(1))) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
 }
+
