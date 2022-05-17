@@ -75,19 +75,11 @@ public class CSVLibrary {
         System.out.println();
 
         for (String[] row : allRows) {
-            for (String i : row) {
-                if (c < 1) {
-                    System.out.print(i + "     ");
-                    c++;
-                } else if (i.equals("Buy")) {
-                    System.out.print(i + "        ");
-                } else if (i.equals("Доллар")) {
-                    System.out.print(i + "    ");
-                } else {
-                    System.out.print(i + "      ");
-                }
+            for (String index: row) {;
+                System.out.printf("%-15s", index);
             }
             System.out.println();
+
         }
     }
 }

@@ -18,8 +18,10 @@ public class Auth {
                 Statement statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(sql);
                 System.out.println("Ведите логин");
+                System.out.print("--> ");
                 String log = sc.next();
                 System.out.println("Ведите пароль");
+                System.out.print("--> ");
                 String password_admin = sc.next();
                 while (rs.next()) {
                     String log_correct = rs.getString(4);

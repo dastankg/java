@@ -48,7 +48,7 @@ public class Pars {
             try (PrintWriter writer = new PrintWriter("test.csv")) {
 
                 StringBuilder sb = new StringBuilder();
-                sb.append("id");
+                sb.append("Id");
                 sb.append(',');
                 sb.append("Name");
                 sb.append(',');

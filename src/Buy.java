@@ -14,6 +14,7 @@ public class Buy {
         System.out.println("4 - KZT");
         int n;
         while (true) {
+            System.out.print("--> ");
             n = sc.nextInt();
             if (4 < n || n < 1) {
                 System.out.println("Не верно попробуйте еще раз");
@@ -22,12 +23,13 @@ public class Buy {
             }
         }
 
-        System.out.println("Сколько");
+        System.out.println("На какую сумму вы хотите купить?");
+        System.out.print("--> ");
         double c = sc.nextDouble();
-
         double count = c * Double.parseDouble(CSVLibrary.CSV(n).replace(']', '0'));
         System.out.println("Вам придется заплатить " + count + " som");
         System.out.println("Уверены?\nYes | No ");
+        System.out.print("--> ");
         String s = sc.next();
         Calendar calendar = Calendar.getInstance();
         java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());

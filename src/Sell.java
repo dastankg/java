@@ -14,18 +14,22 @@ public class Sell {
         System.out.println("4 - KZT");
         int n;
         while (true) {
+            System.out.print("--> ");
             n = sc.nextInt();
+            System.out.println();
             if (4 < n || n < 1) {
                 System.out.println("Не верно попробуйте еще раз");
             } else {
                 break;
             }
         }
-        System.out.println("Сколько");
+        System.out.println("На какую сумму вы хотите продать?");
+        System.out.print("--> ");
         double c = sc.nextDouble();
         double count = c * Double.parseDouble(CSVLibrary.CSV(n).replace(']', '0'));
         System.out.println("Вам получите " + count + " som");
         System.out.println("Уверены?\nYes | No ");
+        System.out.print("--> ");
         String s = sc.next();
         Calendar calendar = Calendar.getInstance();
         java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());

@@ -12,14 +12,16 @@ public class Pay {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("Напишите ваш INN");
+            System.out.print("--> ");
             String inn = sc.next();
-            System.out.println("Напишите сумму");
             if (check_inn(inn)) {
+                System.out.println("Напишите сумму");
+                System.out.print("--> ");
                 double d = sc.nextDouble();
                 int n = 1;
                 try {
                     Connection connection = DB.main();
-                    String sql = "SELECT client_id,  personal_number FROM client_data WHERE personal_number = " + inn;
+                    String sql = "SELECT client_id,  personal_number FROM client_data WHERE personal_number =" + inn;
                     assert connection != null;
                     Statement statement = connection.createStatement();
                     ResultSet rs = statement.executeQuery(sql);
@@ -63,11 +65,9 @@ public class Pay {
             assert connection != null;
             PreparedStatement st = connection.prepareStatement("INSERT INTO credit_history (client_id, date_pay, sum_pay) " +
                     "value (?, ?, ?)");
-
-            st.setDouble(1, n);
-
             Calendar calendar = Calendar.getInstance();
             java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
+            st.setInt(1, n);
             st.setDate(2, startDate);
             st.setDouble(3, d);
             st.executeUpdate();

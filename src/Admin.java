@@ -1,5 +1,4 @@
 import java.sql.*;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.Calendar;
@@ -61,6 +60,7 @@ public class Admin {
             System.out.println(e);
         }
         System.out.println("Хотите увидить подробную инфу | yes > 0");
+        System.out.print("--> ");
         int n = sc.nextInt();
         if (n > 0) {
             try {
@@ -70,6 +70,15 @@ public class Admin {
                 assert connection != null;
                 Statement statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery(sql);
+                System.out.printf("%-15s", "ID");
+                System.out.printf("%-15s", "Age");
+                System.out.printf("%-15s", "Phone number");
+                System.out.printf("%-15s", "Personal number");
+                System.out.printf("%-15s", "City");
+                System.out.printf("%-15s", "Job");
+                System.out.printf("%-15s", "Salary client");
+                System.out.println();
+
                 while (rs.next()) {
                     String one = rs.getString(1);
                     String two = rs.getString(2);
@@ -78,13 +87,52 @@ public class Admin {
                     String five = rs.getString(5);
                     String six = rs.getString(6);
                     String seven = rs.getString(7);
-                    System.out.println("ID = " + one);
-                    System.out.println("Age = " + two);
-                    System.out.println("Phone number = " + three);
-                    System.out.println("Personal number = " + four);
-                    System.out.println("City = " + five);
-                    System.out.println("Job = " + six);
-                    System.out.println("Salary client = " + seven);
+                    System.out.printf("%-15s", one);
+                    System.out.printf("%-15s", two);
+                    System.out.printf("%-15s", three);
+                    System.out.printf("%-15s", four);
+                    System.out.printf("%-15s", five);
+                    System.out.printf("%-15s", six);
+                    System.out.printf("%-15s", seven);
+                    System.out.println();
+                }
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+
+            try {
+                Connection connection = DB.main();
+                String sql = "SELECT client_id, sum_credit, sum_pay, sum_pay_credit, date_start, date_end, percent FROM client_status " +
+                        "inner JOIN client using (client_id) WHERE client_id = " + n;
+
+                assert connection != null;
+                Statement statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(sql);
+                System.out.println();
+                System.out.println();
+
+                System.out.printf("%-15s", "Sum_credit");
+                System.out.printf("%-15s", "Sum_pay");
+                System.out.printf("%-15s", "Sum_pay_credit");
+                System.out.printf("%-15s", "date_start");
+                System.out.printf("%-15s", "date_end");
+                System.out.printf("%-15s", "Percent");
+                System.out.println();
+                while (rs.next()) {
+                    String id = rs.getString(2);
+                    String month = rs.getString(3);
+                    String sum_credit = rs.getString(4);
+                    String percent = rs.getString(5);
+                    String sum_after_percent = rs.getString(6);
+                    String um_after_percent = rs.getString(7);
+                    System.out.printf("%-15s", id);
+                    System.out.printf("%-15s", month);
+                    System.out.printf("%-15s", sum_credit);
+                    System.out.printf("%-15s", percent);
+                    System.out.printf("%-15s", sum_after_percent);
+                    System.out.printf("%-15s", um_after_percent);
+                    System.out.println();
+
                 }
             } catch (SQLException e) {
                 System.out.println(e);
@@ -95,6 +143,7 @@ public class Admin {
     public static void credit_4(int n) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Даем кредит?\nYes | No");
+        System.out.print("--> ");
         String decide = sc.next().toLowerCase(Locale.ROOT);
         if (decide.equals("yes")) {
             try {
@@ -240,17 +289,26 @@ public class Admin {
             assert connection != null;
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
+            System.out.println();
+            System.out.println();
+            System.out.printf("%-15s", " ");
+            System.out.printf("%-15s", "Month");
+            System.out.printf("%-15s", "Sum Credit");
+            System.out.printf("%-15s", "Percent");
+            System.out.printf("%-15s", "Sum After Percent");
+            System.out.println();
             while (rs.next()) {
                 String id = rs.getString(1);
                 String month = rs.getString(2);
                 String sum_credit = rs.getString(3);
                 String percent = rs.getString(4);
                 String sum_after_percent = rs.getString(5);
-                System.out.println("ID = " + id);
-                System.out.println("Month = " + month);
-                System.out.println("Sum credit = " + sum_credit);
-                System.out.println("Percent = " + percent);
-                System.out.println("Sum_after_percent = " + sum_after_percent);
+                System.out.printf("%-15s", id);
+                System.out.printf("%-15s", month);
+                System.out.printf("%-15s", sum_credit);
+                System.out.printf("%-15s", percent);
+                System.out.printf("%-15s", sum_after_percent);
+                System.out.println();
 
             }
             credit_4(n);
@@ -263,7 +321,8 @@ public class Admin {
     public static void credit_1() {
         Scanner sc = new Scanner(System.in);
         try {
-            System.out.println("Какую заявку хотите посмотреть");
+            System.out.println("Какую заявку хотите посмотреть?");
+            System.out.print("--> ");
             int n = sc.nextInt();
             Connection connection = DB.main();
             String sql1 = "SELECT new_client_id, name_new_client, age, phone_number, city, personal_number, job, " +
@@ -271,6 +330,15 @@ public class Admin {
             assert connection != null;
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql1);
+            System.out.printf("%-15s", "ID");
+            System.out.printf("%-15s", "Name");
+            System.out.printf("%-15s", "Age");
+            System.out.printf("%-15s", "Phone number");
+            System.out.printf("%-15s", "City");
+            System.out.printf("%-15s", "INN");
+            System.out.printf("%-15s", "Job");
+            System.out.printf("%-15s", "Salary");
+            System.out.println();
             while (rs.next()) {
                 String id = rs.getString(1);
                 String name = rs.getString(2);
@@ -280,14 +348,15 @@ public class Admin {
                 String INN = rs.getString(6);
                 String job = rs.getString(7);
                 String salary = rs.getString(8);
-                System.out.println("ID  = " + id);
-                System.out.println("Name = " + name);
-                System.out.println("Age = " + age);
-                System.out.println("Phone_number = " + phone_number);
-                System.out.println("City = " + city);
-                System.out.println("INN = " + INN);
-                System.out.println("Job = " + job);
-                System.out.println("Salary = " + salary);
+
+                System.out.printf("%-15s", id);
+                System.out.printf("%-15s", name);
+                System.out.printf("%-15s", age);
+                System.out.printf("%-15s", phone_number);
+                System.out.printf("%-15s", city);
+                System.out.printf("%-15s", INN);
+                System.out.printf("%-15s", job.equals("1") ? "Yes" : "No");
+                System.out.printf("%-15s", salary);
                 credit_2(n);
             }
 
@@ -302,17 +371,26 @@ public class Admin {
         try {
             Connection connection = DB.main();
             String sql = "SELECT buy_currency_id, name_currency, sum_buy_currency, date_buy FROM buy_currency " +
-                    "INNER JOIN currency c on buy_currency.currency_id = c.currency_id";
+                    "INNER JOIN currency c on buy_currency.currency_id = c.currency_id ORDER BY date_buy";
             assert connection != null;
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            System.out.println("ID" + "  " + "Name" + "  " + "Sum      Date");
+            String[] s = {"ID", "Name", "Sum", "Date"};
+            System.out.printf("%-15s", s[0]);
+            System.out.printf("%-15s", s[1]);
+            System.out.printf("%-15s", s[2]);
+            System.out.printf("%-15s", s[3]);
+            System.out.println();
             while (rs.next()) {
                 String id = rs.getString(1);
                 String name = rs.getString(2);
                 String sum = rs.getString(3);
                 String date = rs.getString(4);
-                System.out.println(id + "   " + name + "   " + sum + "   " + date);
+                System.out.printf("%-15s", id);
+                System.out.printf("%-15s", name);
+                System.out.printf("%-15s", sum);
+                System.out.printf("%-15s", date);
+                System.out.println();
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -323,17 +401,26 @@ public class Admin {
         try {
             Connection connection = DB.main();
             String sql = "SELECT sell_currency_id, name_currency, sum_sell_currency, date_buy FROM sell_currency " +
-                    "INNER JOIN currency c on sell_currency.currency_id = c.currency_id";
+                    "INNER JOIN currency c on sell_currency.currency_id = c.currency_id ORDER BY date_buy";
             assert connection != null;
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            System.out.println("ID" + "  " + "Name" + "  " + "Sum      Date");
+            String[] s = {"ID", "Name", "Sum", "Date"};
+            System.out.printf("%-15s", s[0]);
+            System.out.printf("%-15s", s[1]);
+            System.out.printf("%-15s", s[2]);
+            System.out.printf("%-15s", s[3]);
+            System.out.println();
             while (rs.next()) {
                 String id = rs.getString(1);
                 String name = rs.getString(2);
                 String sum = rs.getString(3);
                 String date = rs.getString(4);
-                System.out.println(id + "   " + name + "   " + sum + "   " + date);
+                System.out.printf("%-15s", id);
+                System.out.printf("%-15s", name);
+                System.out.printf("%-15s", sum);
+                System.out.printf("%-15s", date);
+                System.out.println();
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -344,14 +431,16 @@ public class Admin {
         Scanner sc = new Scanner(System.in);
         try {
             Connection connection = DB.main();
-            System.out.println("Какую валюту вы хотите взять");
+            System.out.println("Какую валюту вы хотите взять?");
             System.out.println("1 - USD");
             System.out.println("2 - EUR");
             System.out.println("3 - RUB");
             System.out.println("4 - KZT");
             System.out.println("5 - KGT");
+            System.out.print("--> ");
             int n = sc.nextInt();
             System.out.println("На какую сумму");
+            System.out.print("--> ");
             double count = sc.nextDouble();
             assert connection != null;
             PreparedStatement st1 = connection.prepareStatement("UPDATE currency SET sum_currency = sum_currency - ? WHERE currency_id = ? ");
@@ -374,8 +463,10 @@ public class Admin {
             System.out.println("3 - RUB");
             System.out.println("4 - KZT");
             System.out.println("5 - KGT");
+            System.out.print("--> ");
             int n = sc.nextInt();
             System.out.println("На какую сумму");
+            System.out.print("--> ");
             double count = sc.nextDouble();
             assert connection != null;
             PreparedStatement st1 = connection.prepareStatement("UPDATE currency SET sum_currency = sum_currency + ? WHERE currency_id = ? ");
